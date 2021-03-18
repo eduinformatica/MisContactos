@@ -1,20 +1,39 @@
 
 import java.awt.Toolkit;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * @author DGOMEZ
  */
 public class AgendaTelefonica extends javax.swing.JFrame {
 
-    ModeloComponente modeloComponente = new ModeloComponente();
+//    ModeloComponente modeloComponente = new ModeloComponente();
+    DefaultTableModel modeloTablaContacto;
     Validacion validacion = new Validacion();
+    
+    private void columnasTablaContacto() {
+        Object[] columnas = new Object[]{"DNI", "NOMBRE", "APELLIDOS", "CELULAR", "CORREO"};
+        modeloTablaContacto = new DefaultTableModel(columnas, 0);
+
+        tblContactos.setModel(modeloTablaContacto);
+    }
+    
+    private void agregarContacto() {
+        Object[] fila = new Object[]{
+            txtIdentificacion.getText() + "-" + txtDigitoVerificador.getText(), txtNombre.getText(), 
+            txtApPaterno.getText() + " " + txtApMaterno.getText(), txtCelular.getText(), txtCorreo.getText()
+        };
+        
+       modeloTablaContacto.addRow(fila);
+    }
 
     public AgendaTelefonica() {
         initComponents();
         setLocationRelativeTo(null);
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/logo2.png")));
 
-        tblContactos.setModel(modeloComponente.columnasTablaContacto());
+//        tblContactos.setModel(modeloComponente.columnasTablaContacto());
+        columnasTablaContacto();
     }
 
     @SuppressWarnings("unchecked")
@@ -332,6 +351,8 @@ public class AgendaTelefonica extends javax.swing.JFrame {
         validacion.validarTextoVacio(txtNombre.getText(), txtTelefonoFijo.getText(), txtCelular.getText(), txtCorreo.getText());
         validacion.validarTeclaCaracteres(txtNombre.getText(), txtApPaterno.getText(), txtApMaterno.getText());
         validacion.validarCorreo(txtCorreo.getText());
+        
+        agregarContacto();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyTyped
