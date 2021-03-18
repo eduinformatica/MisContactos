@@ -56,7 +56,7 @@ public class Validacion {
             mat = pat.matcher(cadena); //Comparar expresion regular con cadena
         
             if (mat.matches()) {
-                System.out.println("Texto validado correctamente");
+//                System.out.println("Texto validado correctamente");
             } else {
                 JOptionPane.showMessageDialog(null, "E: Formato del texto no corresponde a un texto", "Mis Contactos - NetBeansIDE",
                         JOptionPane.OK_OPTION, iconWarning);
