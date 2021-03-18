@@ -95,9 +95,21 @@ public class AgendaTelefonica extends javax.swing.JFrame {
         lblTelefonoFijo.setForeground(new java.awt.Color(255, 255, 255));
         lblTelefonoFijo.setText("Teléfono Fijo:");
 
+        txtTelefonoFijo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoFijoKeyTyped(evt);
+            }
+        });
+
         lblCelular.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         lblCelular.setForeground(new java.awt.Color(255, 255, 255));
         lblCelular.setText("Celular:");
+
+        txtCelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCelularKeyTyped(evt);
+            }
+        });
 
         lblDireccion.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         lblDireccion.setForeground(new java.awt.Color(255, 255, 255));
@@ -109,6 +121,11 @@ public class AgendaTelefonica extends javax.swing.JFrame {
 
         btnLimpiar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGuardar.setText("Guardar");
@@ -312,7 +329,9 @@ public class AgendaTelefonica extends javax.swing.JFrame {
     }//GEN-LAST:event_navMenuExitActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        validacion.validarTexto(txtNombre.getText(), txtTelefonoFijo.getText(), txtCelular.getText(), txtCorreo.getText());
+        validacion.validarTextoVacio(txtNombre.getText(), txtTelefonoFijo.getText(), txtCelular.getText(), txtCorreo.getText());
+        validacion.validarTeclaCaracteres(txtNombre.getText(), txtApPaterno.getText(), txtApMaterno.getText());
+        validacion.validarCorreo(txtCorreo.getText());
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentificacionKeyTyped
@@ -324,6 +343,26 @@ public class AgendaTelefonica extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtDigitoVerificadorKeyTyped
+
+    private void txtTelefonoFijoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoFijoKeyTyped
+        validacion.validarTeclaNumero(evt);
+    }//GEN-LAST:event_txtTelefonoFijoKeyTyped
+
+    private void txtCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyTyped
+        validacion.validarTeclaNumero(evt);
+    }//GEN-LAST:event_txtCelularKeyTyped
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtIdentificacion.setText("");
+        txtDigitoVerificador.setText("");
+        txtNombre.setText("");
+        txtApPaterno.setText("");
+        txtApMaterno.setText("");
+        txtTelefonoFijo.setText("");
+        txtCelular.setText("");
+        txtDireccion.setText("");
+        txtCorreo.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
